@@ -1,0 +1,57 @@
+
+
+-- Abaixo há a criação das tabelas necessárias para o código
+CREATE TABLE clientes (
+  id_cliente int NOT NULL PRIMARY KEY auto_increment,
+  nome varchar(100) NOT NULL ,
+  cpf varchar(70) NOT NULL unique
+);
+CREATE TABLE colaboradores(
+  id_colaborador int  NOT NULL PRIMARY KEY auto_increment,
+  nome_colaborador varchar(70) NOT NULL,
+  cpf_colaborador varchar(70) NOT NULL unique
+
+
+);
+CREATE TABLE produtos (
+  id_produto int NOT NULL PRIMARY KEY auto_increment,
+  nome_produto varchar(60) NOT NULL,
+  quantidade int NOT NULL
+  
+  
+);
+CREATE TABLE vendas (
+  id_venda int PRIMARY KEY auto_increment NOT NULL,
+  data_venda varchar(45) NOT NULL,
+  hora_venda varchar(45) NOT NULL,
+  id_cliente int NOT NULL,
+  id_colaborador int NOT NULL,
+  foreign key (id_cliente) references clientes(id_cliente),
+  foreign key (id_colaborador) references colaboradores(id_colaborador)
+  
+
+);
+CREATE TABLE venda_produto (
+  id_venda_produto int PRIMARY key auto_increment NOT NULL,
+  id_venda int NOT NULL,
+  id_produto int NOT NULL,
+  foreign key (id_venda) references vendas (id_venda),
+  foreign key (id_produto) references produtos (id_produto)
+);
+
+-- Abaixo há a inserção dos dados nas tabelas
+INSERT INTO clientes VALUES (1, 'hugo', '11-22563-00');
+INSERT INTO colaboradores VALUES (2, 'nolan', '11-36672-00');
+INSERT INTO produtos VALUES (4, 'agua', 55);
+INSERT INTO vendas (data_venda,hora_venda,id_cliente,id_colaborador) values ('2025-11-13','14:30',1,2);
+
+
+-- Abaixo há o código para a demonstração das tabelas com dados
+SELECT * FROM clientes;
+SELECT * FROM colaboradores;
+SELECT * FROM produtos;
+SELECT id_venda, data_venda,id_cliente,id_colaborador FROM vendas;
+
+  
+
+
